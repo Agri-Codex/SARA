@@ -6,3 +6,4 @@ python-dotenv
 pvporcupine
 pyaudio
 customtkinter
+openai
