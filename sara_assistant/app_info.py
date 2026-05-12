@@ -1,0 +1,5 @@
+APP_NAME = "SARA Assistant"
+APP_VERSION = "1.0.0"
+APP_AUTHOR = "Agri-Codex"
+APP_DESCRIPTION = "SARA Assistant - Jarvis Lite desktop AI assistant for Windows."
+APP_WEBSITE = "https://github.com/Agri-Codex/SARA-github.io."
