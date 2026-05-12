@@ -1,5 +1,23 @@
 # SARA Commercial Build Guide
 
+## Premium branding checklist
+
+### UI/UX
+- Premium dashboard layout added
+- Sidebar quick actions
+- Brand identity system
+- Version display
+- Command center styling
+- Accent theme system
+
+### Recommended next visual upgrades
+- Custom `.ico` icon
+- Splash screen
+- Login/onboarding wizard
+- Animated assistant avatar
+- Sound design
+- Branded installer graphics
+
 ## Production checklist
 
 ### Branding
@@ -11,20 +29,21 @@
 - Build standalone EXE:
   - `build_exe.bat`
 - Build installer:
-  - Compile `packaging/SARA_InnoSetup.iss` using Inno Setup Compiler
+  - Compile `packaging/SARA_InnoSetup.iss`
 
 ### Security
-- Store OpenAI keys securely
+- Store API keys securely
 - Consider encrypted config storage
 - Limit dangerous automation commands
 
-### Recommended future upgrades
+### Recommended enterprise upgrades
 - Auto-updater service
 - Crash reporting
 - Telemetry dashboard
-- MSI enterprise deployment
+- MSI deployment
 - Background startup service
-- Full wake-word engine integration
+- Plugin marketplace
+- Cloud sync
 
 ## Release naming
 Example:
