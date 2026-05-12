@@ -4,6 +4,7 @@ from sara_assistant.core.command_router import CommandRouter
 from sara_assistant.core.voice_output import VoiceOutput
 from sara_assistant.core.voice_input import VoiceInput
 from sara_assistant.core.settings import SettingsManager
+from sara_assistant.core.cyber_tools import CyberToolRegistry
 from sara_assistant.app_info import APP_NAME, APP_VERSION
 from sara_assistant import ui_theme as theme
 from sara_assistant.gui.components import AnimatedAvatar, VoiceWaveform, NotificationCenter
@@ -16,7 +17,7 @@ class SaraDashboard(ctk.CTk):
     def __init__(self):
         super().__init__()
         self.title(f"{APP_NAME} v{APP_VERSION}")
-        self.geometry("1440x860")
+        self.geometry("1520x900")
         self.configure(fg_color=theme.APP_BG)
 
         ctk.set_appearance_mode("dark")
@@ -80,14 +81,18 @@ class SaraDashboard(ctk.CTk):
         self.main_panel = ctk.CTkFrame(self, fg_color=theme.APP_BG)
         self.main_panel.pack(side="left", fill="both", expand=True)
 
-        self.header = ctk.CTkLabel(self.main_panel, text="Premium AI Command Center", font=theme.FONT_TITLE, text_color=theme.TEXT_MAIN)
+        self.header = ctk.CTkLabel(self.main_panel, text="Premium AI + Cybersecurity Command Center", font=theme.FONT_TITLE, text_color=theme.TEXT_MAIN)
         self.header.pack(pady=(24, 6))
 
-        self.subheader = ctk.CTkLabel(self.main_panel, text="Voice • Automation • Memory • AI • Plugins • Security", font=theme.FONT_SUBTITLE, text_color=theme.TEXT_MUTED)
+        self.subheader = ctk.CTkLabel(self.main_panel, text="Voice • Automation • Memory • AI • Plugins • Security • Cyber Tools", font=theme.FONT_SUBTITLE, text_color=theme.TEXT_MUTED)
         self.subheader.pack(pady=(0, 16))
 
-        self.output_box = ctk.CTkTextbox(self.main_panel, width=820, height=470, fg_color=theme.CARD_BG, text_color=theme.TEXT_MAIN, corner_radius=18, font=theme.FONT_BODY)
+        self.output_box = ctk.CTkTextbox(self.main_panel, width=820, height=430, fg_color=theme.CARD_BG, text_color=theme.TEXT_MAIN, corner_radius=18, font=theme.FONT_BODY)
         self.output_box.pack(pady=10)
+
+        self.cyber_box = ctk.CTkTextbox(self.main_panel, width=820, height=170, fg_color=theme.CARD_BG, text_color=theme.TEXT_MAIN, corner_radius=18, font=theme.FONT_BODY)
+        self.cyber_box.pack(pady=8)
+        self.cyber_box.insert("end", CyberToolRegistry.list_tools_text() + "\n\n" + CyberToolRegistry.safety_notice())
 
         self.entry = ctk.CTkEntry(self.main_panel, width=740, height=48, placeholder_text="Enter command or ask AI...", corner_radius=14)
         self.entry.pack(pady=(14, 10))
@@ -106,11 +111,11 @@ class SaraDashboard(ctk.CTk):
         self.notification_center = NotificationCenter(self.right_panel)
         self.notification_center.pack(padx=16, pady=12, fill="x")
         self.notification_center.notify("Premium UI loaded.")
-        self.notification_center.notify("Settings, plugins, profiles, sync and security modules ready.")
+        self.notification_center.notify("Cybersecurity toolkit panel loaded.")
 
-        self.info_box = ctk.CTkTextbox(self.right_panel, width=290, height=220, fg_color=theme.CARD_BG, text_color=theme.TEXT_MAIN, corner_radius=16)
+        self.info_box = ctk.CTkTextbox(self.right_panel, width=290, height=260, fg_color=theme.CARD_BG, text_color=theme.TEXT_MAIN, corner_radius=16)
         self.info_box.pack(padx=16, pady=12)
-        self.info_box.insert("end", "Active Modules:\n• AI Brain\n• Memory\n• Voice Input\n• Security Vault\n• Plugin Marketplace\n• Mobile Sync Framework\n• Wake-word Framework\n")
+        self.info_box.insert("end", "Active Modules:\n• AI Brain\n• Memory\n• Voice Input\n• Security Vault\n• Plugin Marketplace\n• Mobile Sync Framework\n• Wake-word Framework\n• Cybersecurity Toolkit\n")
 
     def open_settings(self):
         SettingsWindow(self)
