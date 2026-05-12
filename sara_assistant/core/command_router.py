@@ -1,6 +1,7 @@
 from sara_assistant.automation.pc_control import PCControl
 from sara_assistant.core.brain import SaraBrain
 from sara_assistant.core.memory import Memory
+from sara_assistant.core.updater import SaraUpdater
 
 
 class CommandRouter:
@@ -19,6 +20,10 @@ class CommandRouter:
             response = PCControl.open_whatsapp_web()
         elif "open notepad" in command:
             response = PCControl.open_notepad()
+        elif "check updates" in command:
+            response = SaraUpdater.check_for_updates()
+        elif "version" in command:
+            response = f"Current version: {SaraUpdater.current_version()}"
         elif command == "shutdown":
             response = PCControl.shutdown_pc()
         elif command == "confirm shutdown":
