@@ -1,3 +1,4 @@
+import itertools
 import customtkinter as ctk
 
 
@@ -15,8 +16,19 @@ class NotificationCenter(ctk.CTkFrame):
 class AnimatedAvatar(ctk.CTkFrame):
     def __init__(self, master):
         super().__init__(master)
+        self.frames = itertools.cycle([
+            "◉ SARA",
+            "◎ SARA",
+            "◍ SARA",
+            "◉ SARA",
+        ])
         self.label = ctk.CTkLabel(self, text="◉ SARA", font=("Segoe UI", 26, "bold"))
         self.label.pack(padx=10, pady=10)
+        self.animate()
+
+    def animate(self):
+        self.label.configure(text=next(self.frames))
+        self.after(420, self.animate)
 
 
 class VoiceWaveform(ctk.CTkProgressBar):
