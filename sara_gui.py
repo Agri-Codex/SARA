@@ -1,8 +1,6 @@
-#!/usr/bin/env python3
-"""Launch Sara GUI."""
-
-from sara.gui import main
+from sara_assistant.gui.dashboard import SaraDashboard
 
 
 if __name__ == "__main__":
-    main()
+    app = SaraDashboard()
+    app.mainloop()

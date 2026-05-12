@@ -1,0 +1,9 @@
+vosk
+sounddevice
+pyttsx3
+pyautogui
+python-dotenv
+pvporcupine
+pyaudio
+customtkinter
+openai
