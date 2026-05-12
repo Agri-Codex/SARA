@@ -1,16 +1,36 @@
 from sara_assistant.automation.pc_control import PCControl
+from sara_assistant.core.brain import SaraBrain
+from sara_assistant.core.memory import Memory
+
 
 class CommandRouter:
+    def __init__(self):
+        self.brain = SaraBrain()
+        self.memory = Memory()
+
     def route(self, command: str) -> str:
-        command = command.lower()
+        command = command.lower().strip()
 
         if "open google" in command:
-            return PCControl.open_google()
+            response = PCControl.open_google()
         elif "open youtube" in command:
-            return PCControl.open_youtube()
-        elif "shutdown" in command:
-            return PCControl.shutdown_pc()
+            response = PCControl.open_youtube()
+        elif "open whatsapp" in command:
+            response = PCControl.open_whatsapp_web()
+        elif "open notepad" in command:
+            response = PCControl.open_notepad()
+        elif command == "shutdown":
+            response = PCControl.shutdown_pc()
+        elif command == "confirm shutdown":
+            response = PCControl.confirm_shutdown()
+        elif command.startswith("remember "):
+            response = self.memory.remember(command.replace("remember ", "", 1))
+        elif "recall memory" in command:
+            response = self.memory.recall()
         elif "hello" in command:
-            return "Hello, I am SARA. How can I help you?"
+            response = "Hello, I am SARA. How can I help you?"
         else:
-            return f"Command not recognized: {command}"
+            response = self.brain.ask(command)
+
+        self.memory.log_command(command, response)
+        return response
