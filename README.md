@@ -1,5 +1,3 @@
-# OpenJarvisLite
-
 ## Sara — Open Source Local Assistant
 
 Sara is a lightweight open-source assistant inspired by Jarvis. She is designed to run locally, speak with a friendly female persona, and optionally access the internet for search and updated information. Sara is also an expert in cyber security and ethical hacking.
