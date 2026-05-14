@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SARA AI Core</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================
+   GLOBAL
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#050507;
+    font-family:'Inter',sans-serif;
+    overflow:hidden;
+    color:white;
+}
+
+/* =========================
+   MAIN LAYOUT
+========================= */
+
+.main-container{
+    width:100vw;
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    background:
+    radial-gradient(circle at center,
+    rgba(0,242,255,0.08),
+    transparent 40%),
+    radial-gradient(circle at center,
+    rgba(188,19,254,0.08),
+    transparent 60%);
+}
+
+/* =========================
+   AI CORE CONTAINER
+========================= */
+
+.ai-wrapper{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:40px;
+}
+
+/* =========================
+   AI CORE
+========================= */
+
+.ai-container{
+    position:relative;
+    width:260px;
+    height:260px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* Outer glow */
+.ai-container::before{
+    content:'';
+    position:absolute;
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    background:
+    radial-gradient(circle,
+    rgba(0,242,255,0.2),
+    transparent 70%);
+    filter:blur(40px);
+    animation:pulseGlow 4s ease-in-out infinite;
+}
+
+/* Morphing Rings */
+
+.tentacle-ring{
+    position:absolute;
+    width:100%;
+    height:100%;
+    border-radius:
+    30% 70% 70% 30% /
+    30% 30% 70% 70%;
+
+    background:
+    linear-gradient(
+        45deg,
+        #00f2ff,
+        #bc13fe
+    );
+
+    opacity:0.8;
+    mix-blend-mode:screen;
+}
+
+/* Ring 1 */
+
+.ring-1{
+    animation:
+    chaos-spin 3s linear infinite,
+    morph-extreme 4s ease-in-out infinite alternate;
+}
+
+/* Ring 2 */
+
+.ring-2{
+    width:115%;
+    height:115%;
+    opacity:0.5;
+    filter:blur(8px);
+
+    animation:
+    chaos-spin-reverse 6s linear infinite,
+    morph-extreme 7s ease-in-out infinite alternate;
+}
+
+/* Ring 3 */
+
+.ring-3{
+    width:130%;
+    height:130%;
+    opacity:0.25;
+    filter:blur(18px);
+
+    animation:
+    chaos-spin 10s linear infinite,
+    morph-extreme 12s ease-in-out infinite alternate;
+}
+
+/* Core */
+
+.core-glow{
+    position:absolute;
+    width:90px;
+    height:90px;
+    border-radius:50%;
+
+    background:
+    radial-gradient(circle,
+    white,
+    #00f2ff);
+
+    filter:blur(5px);
+
+    animation:corePulse 2s ease-in-out infinite;
+}
+
+/* Center Logo */
+
+.core-text{
+    position:absolute;
+    z-index:10;
+    font-size:20px;
+    font-weight:700;
+    letter-spacing:4px;
+    text-shadow:
+    0 0 10px #00f2ff,
+    0 0 20px #bc13fe;
+}
+
+/* =========================
+   STATUS PANEL
+========================= */
+
+.status-panel{
+    width:520px;
+    padding:30px;
+
+    background:
+    rgba(255,255,255,0.03);
+
+    backdrop-filter:blur(18px);
+
+    border:
+    1px solid rgba(0,242,255,0.15);
+
+    border-radius:24px;
+
+    box-shadow:
+    0 0 30px rgba(0,0,0,0.8);
+}
+
+.status-title{
+    font-size:28px;
+    margin-bottom:10px;
+
+    color:#00f2ff;
+}
+
+.status-sub{
+    color:#bdbdbd;
+    margin-bottom:25px;
+}
+
+/* Command Input */
+
+.command-box{
+    display:flex;
+    gap:10px;
+}
+
+.command-box input{
+    flex:1;
+
+    background:
+    rgba(15,15,20,0.95);
+
+    border:
+    1px solid #bc13fe;
+
+    border-radius:12px;
+
+    padding:14px 18px;
+
+    color:white;
+
+    font-size:15px;
+}
+
+.command-box input:focus{
+    outline:none;
+
+    box-shadow:
+    0 0 18px #bc13fe;
+}
+
+/* Buttons */
+
+.command-box button{
+    padding:14px 22px;
+
+    border:none;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-weight:700;
+
+    color:black;
+
+    background:#00f2ff;
+
+    transition:0.3s;
+
+    box-shadow:
+    0 0 20px rgba(0,242,255,0.5);
+}
+
+.command-box button:hover{
+    transform:translateY(-2px);
+
+    box-shadow:
+    0 0 30px #00f2ff;
+}
+
+/* Response */
+
+.response{
+    margin-top:25px;
+
+    background:
+    rgba(188,19,254,0.08);
+
+    border-left:
+    4px solid #bc13fe;
+
+    padding:18px;
+
+    border-radius:10px;
+
+    line-height:1.7;
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes chaos-spin{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+@keyframes chaos-spin-reverse{
+    to{
+        transform:rotate(-360deg);
+    }
+}
+
+@keyframes morph-extreme{
+
+    0%{
+        border-radius:
+        30% 70% 70% 30% /
+        30% 30% 70% 70%;
+    }
+
+    25%{
+        border-radius:
+        10% 90% 20% 80% /
+        85% 15% 55% 45%;
+    }
+
+    50%{
+        border-radius:
+        70% 30% 85% 15% /
+        15% 85% 30% 70%;
+    }
+
+    75%{
+        border-radius:
+        15% 85% 15% 85% /
+        85% 15% 85% 15%;
+    }
+
+    100%{
+        border-radius:
+        30% 70% 70% 30% /
+        30% 30% 70% 70%;
+    }
+}
+
+@keyframes corePulse{
+
+    0%{
+        transform:scale(1);
+        opacity:0.8;
+    }
+
+    50%{
+        transform:scale(1.15);
+        opacity:1;
+    }
+
+    100%{
+        transform:scale(1);
+        opacity:0.8;
+    }
+}
+
+@keyframes pulseGlow{
+
+    0%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.08);
+    }
+
+    100%{
+        transform:scale(1);
+    }
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:768px){
+
+    .main-container{
+        padding:20px;
+    }
+
+    .status-panel{
+        width:100%;
+    }
+
+    .ai-container{
+        width:190px;
+        height:190px;
+    }
+
+    .command-box{
+        flex-direction:column;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="main-container">
+
+    <div class="ai-wrapper">
+
+        <!-- AI CORE -->
+
+        <div class="ai-container">
+
+            <div class="tentacle-ring ring-1"></div>
+            <div class="tentacle-ring ring-2"></div>
+            <div class="tentacle-ring ring-3"></div>
+
+            <div class="core-glow"></div>
+
+            <div class="core-text">
+                SARA
+            </div>
+
+        </div>
+
+        <!-- PANEL -->
+
+        <div class="status-panel">
+
+            <div class="status-title">
+                SARA AI Command Center
+            </div>
+
+            <div class="status-sub">
+                Premium Cyberpunk AI Assistant Interface
+            </div>
+
+            <div class="command-box">
+
+                <input
+                    type="text"
+                    placeholder="Enter command or ask AI..."
+                >
+
+                <button>
+                    Execute
+                </button>
+
+            </div>
+
+            <div class="response">
+                <strong>SARA:</strong>
+                System initialized successfully.
+                AI core online.
+                Neural systems active.
+                Awaiting command...
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
